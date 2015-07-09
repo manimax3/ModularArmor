@@ -1,0 +1,18 @@
+# Things you can translate if you want
+ChestPlate Name: ChestPlate
+Leggings Name: Leggings
+Boots Name: Boots
+Helmet Name: Helmet
+
+PluginEnabled: Succesfully enabled without any Errors!
+ApiNotWorking: The NBT Item API isn't working properly!
+PermissionMissing: You dont have the required Permission to perform this!
+ConfigReload: Succesfully reloaded the Plugin!
+ModularArmorCreationStart: You started creating a Modular Armor!
+ModularArmorCreationWin: You created successfull a ModularArmor Part!
+ModularArmorCreationFail: Something went wrong with the creation of the modular armor!
+ModularArmorCreationCancel: The creation of the ModularArmor part couldn't been finished!
+ModularArmorCreationAlreadyCreating: You are alreday creating a Modula Armor Part!
+ModularArmorCreationAlreadyModular: The Armor Part is already a Modular Armor!
+AlreadyMaxLevel: This Upgrade is already at max Level!
+ModularArmorCreationNoDamage: To create a new Modular armor the input armor must not have any damage!

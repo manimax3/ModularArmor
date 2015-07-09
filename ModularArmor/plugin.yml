@@ -1,0 +1,15 @@
+name: ModularArmor
+main: de.manimax3.ModularArmor
+version: 1.0
+description: Currently doing not so much
+depend: [ItemNBTAPI]
+
+commands:
+   mareload:
+     description: Reloads the Config!
+     usage: /mar
+     aliases: [mar,mreload]
+   matest:
+     description: Testing
+     usage: /mat <arg>
+     aliases: [mat]

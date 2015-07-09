@@ -1,0 +1,6 @@
+DiamondBlockLossChance: 0
+CreationWaitTime: 10
+Upgrades:
+  DamageReduction:
+    BasePrize:
+    RaisingConstant:
