@@ -2,7 +2,7 @@ name: ModularArmor
 main: de.manimax3.ModularArmor
 version: 1.0
 description: Currently doing not so much
-depend: [ItemNBTAPI]
+depend: [ItemNBTAPI, Vault]
 
 commands:
    mareload:

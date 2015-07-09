@@ -16,10 +16,10 @@ import de.manimax3.bases.BaseInventory;
 
 public class MAGuiOpenListener implements Listener {
 	
-	protected static HashMap<Player, ItemStack> playerInInv;
+	public static HashMap<Player, ItemStack> playerInMAGui;
 	
 	public MAGuiOpenListener() {
-		playerInInv = new HashMap<Player, ItemStack>();
+		playerInMAGui = new HashMap<Player, ItemStack>();
 	}
 	
 	@EventHandler
@@ -33,20 +33,20 @@ public class MAGuiOpenListener implements Listener {
 		
 		p.updateInventory();
 		
-		playerInInv.put(p, e.getItem());
-		p.openInventory(BaseInventory.createInventory());
+		playerInMAGui.put(p, e.getItem());
+		p.openInventory(BaseInventory.createInventory(p));
 		e.setCancelled(true);
 	}
 	@EventHandler
 	public void onInvenoryClose(InventoryCloseEvent e){
-		if(playerInInv.containsKey(e.getPlayer())){
-			playerInInv.remove(e.getPlayer());
+		if(playerInMAGui.containsKey(e.getPlayer())){
+			playerInMAGui.remove(e.getPlayer());
 		}
 	}
 	@EventHandler
 	public void onPlayerDc(PlayerQuitEvent e){
-		if(playerInInv.containsKey(e.getPlayer())){
-			playerInInv.remove(e.getPlayer());
+		if(playerInMAGui.containsKey(e.getPlayer())){
+			playerInMAGui.remove(e.getPlayer());
 		}
 	}
 }

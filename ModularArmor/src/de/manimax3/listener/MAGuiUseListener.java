@@ -13,6 +13,7 @@ import de.manimax3.armor.ArmorType;
 import de.manimax3.armor.ModularArmorPart;
 import de.manimax3.armor.UpgradeType;
 import de.manimax3.bases.BaseArmorItem;
+import de.manimax3.bases.BaseInventory;
 import de.manimax3.util.MessageManager;
 import de.manimax3.util.MessageManager.MessageType;
 import de.tr7zw.itemnbtapi.Itemnbtapi;
@@ -30,14 +31,15 @@ public class MAGuiUseListener implements Listener {
 				.equals("Modular Armor Interface"))
 			return;
 
-		if (!MAGuiOpenListener.playerInInv.containsKey((Player) e
+		if (!MAGuiOpenListener.playerInMAGui.containsKey((Player) e
 				.getWhoClicked())) {
 			ErrorCode.WRONG_Player_In_Inventory.out();
 			return;
 		}
-
+		Player p = (Player) e.getWhoClicked();
 		e.setCancelled(true);
 
+		
 		ItemStack item = e.getCurrentItem();
 
 		if (item == null || item.getType() == Material.STAINED_GLASS_PANE)
@@ -51,12 +53,20 @@ public class MAGuiUseListener implements Listener {
 				.valueOf(nbtItem.getString("UpgradeType"));
 
 		int id = Itemnbtapi.getNBTItem(
-				MAGuiOpenListener.playerInInv.get((Player) e.getWhoClicked()))
+				MAGuiOpenListener.playerInMAGui.get(p))
 				.getInteger("ID");
+		double price = nbtItem.getDouble("Price");
+		
+		if(!ModularArmor.economy.has(p, price)){
+			msgmgr.msgPlayer(p, MessageType.INFO, "NotEnoughMoney");
+			return;
+		}
 
 		ModularArmorPart armor = null;
-		Material mat = MAGuiOpenListener.playerInInv.get(
-				(Player) e.getWhoClicked()).getType();
+		
+		Material mat = MAGuiOpenListener.playerInMAGui.get(
+				p).getType();
+		
 		ArmorType arType = ArmorType.getArmorTypeByMat(mat);
 
 		if (arType == null || type == null) {
@@ -66,15 +76,17 @@ public class MAGuiUseListener implements Listener {
 		armor = ModularArmorPart.deserialize(id, arType);
 		
 		if(armor.getUpgradeLevel(type) >= type.maxLevel){
-			msgmgr.msgPlayer((Player) e.getWhoClicked(), MessageType.INFO, "AlreadyMaxLevel");
+			msgmgr.msgPlayer(p, MessageType.INFO, "AlreadyMaxLevel");
 			return;
 		}
 		
+		ModularArmor.economy.withdrawPlayer(p, price);
+		msgmgr.msgPlayer(p, MessageType.GOOD, "UpgradeBuySuc");
 		armor.addUpgrade(type, 1);
-
 		BaseArmorItem.updateArmorItem(
-				MAGuiOpenListener.playerInInv.get((Player) e.getWhoClicked()),
-				(Player) e.getWhoClicked());
+				MAGuiOpenListener.playerInMAGui.get(p),
+				p);
+		BaseInventory.update(p);
 	}
 
 }

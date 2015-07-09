@@ -16,3 +16,6 @@ ModularArmorCreationAlreadyCreating: You are alreday creating a Modula Armor Par
 ModularArmorCreationAlreadyModular: The Armor Part is already a Modular Armor!
 AlreadyMaxLevel: This Upgrade is already at max Level!
 ModularArmorCreationNoDamage: To create a new Modular armor the input armor must not have any damage!
+CostToUpgrade: "Upgrade Prize:"
+NotEnoughMoney: Sorry but you dont have enough money to buy this!
+UpgradeBuySuc: You succesfully bought a new Upgrade!

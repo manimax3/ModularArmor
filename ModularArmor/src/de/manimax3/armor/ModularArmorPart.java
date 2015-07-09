@@ -14,10 +14,14 @@ public class ModularArmorPart {
 	private ArmorType type;
 	private HashMap<UpgradeType, Integer> upgrades;
 
-	private static FileConfiguration data;
+	private static FileConfiguration data = null;
+	private static FileConfiguration config = null;
 
 	public ModularArmorPart(ArmorType type) {
-		data = ModularArmor.cfgmgr.getData();
+		if (data == null)
+			data = ModularArmor.cfgmgr.getData();
+		if (config == null)
+			config = ModularArmor.cfgmgr.getConfig();
 		this.type = type;
 		ID = manageID();
 		if (upgrades == null)
@@ -28,7 +32,10 @@ public class ModularArmorPart {
 	private ModularArmorPart(int id, ArmorType type) {
 		this.type = type;
 		this.ID = id;
-		data = ModularArmor.cfgmgr.getData();
+		if (data == null)
+			data = ModularArmor.cfgmgr.getData();
+		if (config == null)
+			config = ModularArmor.cfgmgr.getConfig();
 		if (upgrades == null)
 			upgrades = new HashMap<UpgradeType, Integer>();
 		this.serialize();
@@ -103,7 +110,7 @@ public class ModularArmorPart {
 	public int getUpgradeLevel(UpgradeType type) {
 		if (upgrades.containsKey(type))
 			return upgrades.get(type);
-		return -1;
+		return 0;
 	}
 
 	public static boolean isModular(ItemStack item) {
@@ -143,6 +150,17 @@ public class ModularArmorPart {
 			return true;
 		else
 			return false;
+	}
+
+	public double getPrizeToUpgrade(UpgradeType type) {
+		double basePrize = config.getDouble("Upgrades." + type.toString()
+				+ ".BasePrize");
+		double raisingConst = config.getDouble("Upgrades." + type.toString()
+				+ ".RaisingConstant");
+//		System.out.println(type.toString() + " BasePrize: " + basePrize
+//				+ " Raising: " + raisingConst);
+		return Math.round(basePrize
+				* Math.pow(raisingConst, this.getUpgradeLevel(type)));
 	}
 
 }

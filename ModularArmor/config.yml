@@ -2,5 +2,11 @@ DiamondBlockLossChance: 0
 CreationWaitTime: 10
 Upgrades:
   DamageReduction:
-    BasePrize:
-    RaisingConstant:
+    BasePrize: 10000.0
+    RaisingConstant: 2.0
+  Unbreakable:
+    BasePrize: 10000.0
+    RaisingConstant: 2.0
+  FireAbsorption:
+    BasePrize: 10000.0
+    RaisingConstant: 2.0

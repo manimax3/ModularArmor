@@ -1,7 +1,10 @@
 package de.manimax3;
 
+import net.milkbowl.vault.economy.Economy;
+
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.plugin.PluginManager;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import de.manimax3.cmd.MAReload;
@@ -18,6 +21,8 @@ public class ModularArmor extends JavaPlugin {
 
 	public static final String PREFIX = "[§1Modular§6Armor§r] ";
 
+	public static Economy economy = null;
+	
 	public static ConfigManager cfgmgr;
 	public static MessageManager msgmgr;
 	public static ConsoleCommandSender console;
@@ -26,6 +31,7 @@ public class ModularArmor extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		pm = this.getServer().getPluginManager();
+		setupEconomy();
 		cfgmgr = new ConfigManager(this);
 		msgmgr = new MessageManager();
 		cfgmgr.setup();
@@ -58,10 +64,14 @@ public class ModularArmor extends JavaPlugin {
 		this.getCommand("matest").setExecutor(new Test());
 	}
 	
-	
-	/*
-	 * Error Codes:
-	 * 		- 0001 Wrong Player in MA Inventory Gui
-	 */
+	private boolean setupEconomy()
+    {
+        RegisteredServiceProvider<Economy> economyProvider = getServer().getServicesManager().getRegistration(net.milkbowl.vault.economy.Economy.class);
+        if (economyProvider != null) {
+            economy = economyProvider.getProvider();
+        }
 
+        return (economy != null);
+    }
+	
 }
