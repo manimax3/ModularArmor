@@ -63,7 +63,7 @@ public class BaseArmorItem {
 		return item;
 	}
 
-	public static ItemStack updateArmor(ItemStack item, Player p) {
+	public static ItemStack updateArmorItem(ItemStack item, Player p) {
 		ModularArmorPart armor = ModularArmorPart.deserialize(
 				ModularArmorPart.getID(item),
 				ArmorType.getArmorTypeByMat(item.getType()));
@@ -76,7 +76,6 @@ public class BaseArmorItem {
 		lore.add("§3Upgrades on this Armor");
 		int itemID = armor.getID();
 		
-		//Extremly Buggy
 		if (armor.hasUpgrade(UpgradeType.Unbreakable)) {
 			item.setDurability((short) 0);
 			itemMeta.spigot().setUnbreakable(true);

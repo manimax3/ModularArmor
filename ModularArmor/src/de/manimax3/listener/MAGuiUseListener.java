@@ -72,7 +72,7 @@ public class MAGuiUseListener implements Listener {
 		
 		armor.addUpgrade(type, 1);
 
-		BaseArmorItem.updateArmor(
+		BaseArmorItem.updateArmorItem(
 				MAGuiOpenListener.playerInInv.get((Player) e.getWhoClicked()),
 				(Player) e.getWhoClicked());
 	}
