@@ -9,7 +9,3 @@ commands:
      description: Reloads the Config!
      usage: /mar
      aliases: [mar,mreload]
-   matest:
-     description: Testing
-     usage: /mat <arg>
-     aliases: [mat]

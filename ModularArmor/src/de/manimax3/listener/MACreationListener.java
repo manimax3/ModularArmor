@@ -60,8 +60,10 @@ public class MACreationListener implements Listener {
 		final Player p = e.getPlayer();
 		final Location loc = e.getClickedBlock().getLocation();
 
-		if (!(p.hasPermission("modulararmor.altar_use")))
+		if (!(p.hasPermission("modulararmor.create"))) {
+			msgmgr.msgPlayer(p, MessageType.BAD, "PermissionMissing");
 			return;
+		}
 
 		for (Entity ent : p.getWorld().getEntities()) {
 			if (!(ent instanceof Item))
@@ -75,7 +77,7 @@ public class MACreationListener implements Listener {
 
 			if (!(ArmorType.isArmorType(mat)))
 				continue;
-			
+
 			if ((itemStack.getDurability() > 0)
 					&& !ModularArmorPart.isModular(itemStack)) {
 				msgmgr.msgPlayer(p, MessageType.INFO,

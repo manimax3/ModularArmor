@@ -8,7 +8,6 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import de.manimax3.cmd.MAReload;
-import de.manimax3.cmd.Test;
 import de.manimax3.listener.MACombatListener;
 import de.manimax3.listener.MACreationListener;
 import de.manimax3.listener.MAGuiOpenListener;
@@ -61,7 +60,6 @@ public class ModularArmor extends JavaPlugin {
 
 	private void registerCommand() {
 		this.getCommand("mareload").setExecutor(new MAReload());
-		this.getCommand("matest").setExecutor(new Test());
 	}
 	
 	private boolean setupEconomy()

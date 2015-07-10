@@ -121,7 +121,7 @@ public class BaseInventory {
 		ItemStack item = new ItemStack(Material.IRON_INGOT, 1);
 		ItemMeta meta = item.getItemMeta();
 
-		meta.setDisplayName("Protection Tier I");
+		meta.setDisplayName("Useless");
 
 		item.setItemMeta(meta);
 		return item;
@@ -132,7 +132,7 @@ public class BaseInventory {
 		ItemStack item = new ItemStack(Material.GOLD_INGOT, 1);
 		ItemMeta meta = item.getItemMeta();
 
-		meta.setDisplayName("Protection Tier II");
+		meta.setDisplayName("Useless");
 
 		item.setItemMeta(meta);
 		return item;
