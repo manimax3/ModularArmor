@@ -6,6 +6,7 @@ import java.util.Map.Entry;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
 
+import de.manimax3.ErrorCode;
 import de.manimax3.ModularArmor;
 import de.tr7zw.itemnbtapi.Itemnbtapi;
 
@@ -82,6 +83,7 @@ public class ModularArmorPart {
 
 			return armor;
 		} catch (Exception e) {
+			ErrorCode.DESERIALIZATION_Fail.out();
 			return null;
 		}
 	}
@@ -146,7 +148,7 @@ public class ModularArmorPart {
 	}
 
 	public boolean hasUpgrade(UpgradeType type) {
-		if (upgrades.containsKey(type))
+		if (upgrades.containsKey(type) && upgrades.get(type) > 0)
 			return true;
 		else
 			return false;

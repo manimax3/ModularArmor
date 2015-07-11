@@ -33,7 +33,7 @@ public class MAGuiUseListener implements Listener {
 
 		if (!MAGuiOpenListener.playerInMAGui.containsKey((Player) e
 				.getWhoClicked())) {
-			ErrorCode.WRONG_Player_In_Inventory.out();
+			ErrorCode.Wrong_Player_In_Inventory.out();
 			return;
 		}
 		Player p = (Player) e.getWhoClicked();

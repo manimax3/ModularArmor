@@ -37,7 +37,7 @@ public class BaseInventory {
 				.getArmorTypeByMat((MAGuiOpenListener.playerInMAGui.get(p))
 						.getType()));
 
-		inv.setItem(10, cIro(armor));
+		inv.setItem(10, cPot(armor));
 		inv.setItem(11, cGol(armor));
 		inv.setItem(12, cDia(armor));
 		inv.setItem(13, cBrick(armor));
@@ -61,8 +61,8 @@ public class BaseInventory {
 				invV.setItem(i, cDia(armor));
 				continue;
 			}
-			if (invV.getItem(i).getType() == Material.IRON_INGOT) {
-				invV.setItem(i, cIro(armor));
+			if (invV.getItem(i).getType() == Material.POTION) {
+				invV.setItem(i, cPot(armor));
 				continue;
 			}
 			if (invV.getItem(i).getType() == Material.GOLD_INGOT) {
@@ -116,14 +116,31 @@ public class BaseInventory {
 		return item;
 	}
 
-	// Marked as useless
-	private static ItemStack cIro(ModularArmorPart armor) {
-		ItemStack item = new ItemStack(Material.IRON_INGOT, 1);
+	private static ItemStack cPot(ModularArmorPart armor) {
+		ItemStack item = new ItemStack(Material.POTION, 1);
 		ItemMeta meta = item.getItemMeta();
 
-		meta.setDisplayName("Useless");
+		final UpgradeType type = UpgradeType.PoisonAbsorption;
+
+		List<String> lore = new ArrayList<String>();
+		if (armor.getUpgradeLevel(type) < type.maxLevel) {
+			lore.add("§fPrice: "
+					+ "§6"
+					+ ModularArmor.economy.format(armor.getPrizeToUpgrade(type)));
+		}else lore.add("§7Already at Max Level");
+		meta.setLore(lore);
+
+		meta.setDisplayName("Poison Absorption");
+		meta.addEnchant(Enchantment.ARROW_DAMAGE, 0, false);
 
 		item.setItemMeta(meta);
+		item.removeEnchantment(Enchantment.ARROW_DAMAGE);
+
+		NBTItem nbtItem = new NBTItem(item);
+		nbtItem.setString("UpgradeType", type.toString());
+		nbtItem.setDouble("Price", armor.getPrizeToUpgrade(type));
+		item = nbtItem.getItem();
+
 		return item;
 	}
 

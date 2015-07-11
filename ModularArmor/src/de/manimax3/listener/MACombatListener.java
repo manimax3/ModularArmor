@@ -50,12 +50,13 @@ public class MACombatListener implements Listener {
 	}
 	@EventHandler
 	public void onEntityDamage(EntityDamageEvent e){
-		if(!(e.getCause() == DamageCause.FIRE_TICK)) return;
+		if(!(e.getCause() == DamageCause.FIRE_TICK || e.getCause() == DamageCause.POISON)) return;
 		if (!(e.getEntity() instanceof Player))
 			return;
 		Player p = (Player) e.getEntity();
 		ItemStack[] armorContents = p.getInventory().getArmorContents();
 		int fireAbsorption = 0;
+		int poisonAbsorption = 0;
 		for (ItemStack item : armorContents){
 			if (item == null)
 				continue;
@@ -64,19 +65,27 @@ public class MACombatListener implements Listener {
 			ModularArmorPart armor = ModularArmorPart.deserialize(
 					ModularArmorPart.getID(item),
 					ArmorType.getArmorTypeByMat(item.getType()));
-			if(!armor.hasUpgrade(UpgradeType.FireAbsorption)) continue;
-//			if(armor.hasUpgrade(UpgradeType.Unbreakable)){
-//				ItemMeta meta = item.getItemMeta();
-//				meta.spigot().setUnbreakable(true);
-//				item.setItemMeta(meta);	
-//			}
-
+			if(armor == null)
+				{
+				System.out.println("Null!");
+				return;
+				}
 			fireAbsorption += armor.getUpgradeLevel(UpgradeType.FireAbsorption);
+			poisonAbsorption += armor.getUpgradeLevel(UpgradeType.PoisonAbsorption);
 		}
 		
 		if(fireAbsorption > 0){
 			Random rand = new Random();
-			if(rand.nextInt(10) < fireAbsorption){
+			if(rand.nextInt(8) <= fireAbsorption){
+				double health = p.getHealth() + e.getFinalDamage() * 2;
+				if(health > 20) health = 20;
+				p.setHealth(health);
+			}
+		}
+		
+		if(poisonAbsorption > 0){
+			Random rand = new Random();
+			if(rand.nextInt(8) <= poisonAbsorption){
 				double health = p.getHealth() + e.getFinalDamage() * 2;
 				if(health > 20) health = 20;
 				p.setHealth(health);

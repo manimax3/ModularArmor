@@ -5,7 +5,7 @@ public enum UpgradeType {
 	DamageReduction(5),
 	FireAbsorption(2),
 	Unbreakable(1),
-	Speed(10);
+	PoisonAbsorption(2);
 	
 	public int maxLevel;
 	
