@@ -10,3 +10,6 @@ Upgrades:
   FireAbsorption:
     BasePrize: 10000.0
     RaisingConstant: 2.0
+  PoisionAbsorption:
+    BasePrize: 10000.0
+    RaisingConstant: 2.0
