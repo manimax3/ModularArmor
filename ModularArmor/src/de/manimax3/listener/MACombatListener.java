@@ -76,7 +76,7 @@ public class MACombatListener implements Listener {
 		
 		if(fireAbsorption > 0){
 			Random rand = new Random();
-			if(rand.nextInt(8) <= fireAbsorption){
+			if(rand.nextInt(10) <= fireAbsorption){
 				double health = p.getHealth() + e.getFinalDamage() * 2;
 				if(health > 20) health = 20;
 				p.setHealth(health);
@@ -85,7 +85,7 @@ public class MACombatListener implements Listener {
 		
 		if(poisonAbsorption > 0){
 			Random rand = new Random();
-			if(rand.nextInt(8) <= poisonAbsorption){
+			if(rand.nextInt(10) <= poisonAbsorption){
 				double health = p.getHealth() + e.getFinalDamage() * 2;
 				if(health > 20) health = 20;
 				p.setHealth(health);

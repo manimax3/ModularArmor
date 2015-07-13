@@ -1,7 +1,7 @@
 name: ModularArmor
 main: de.manimax3.ModularArmor
-version: 1.0
-description: Currently doing not so much
+version: 1.2
+description: Adds a ModularArmor
 depend: [ItemNBTAPI, Vault]
 
 commands:
@@ -9,3 +9,7 @@ commands:
      description: Reloads the Config!
      usage: /mar
      aliases: [mar,mreload]
+   maupdate:
+     description: Updates the YML Files!
+     usage: /maupdate [config|localization]
+     aliases: [mau,mu]

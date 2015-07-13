@@ -16,6 +16,10 @@ public class MessageManager {
 		p.sendMessage(ModularArmor.PREFIX + type.color
 				+ ModularArmor.cfgmgr.getLocalization().getString(path));
 	}
+	
+	public void msgConsole(MessageType type, String path){
+		ModularArmor.console.sendMessage(ModularArmor.PREFIX + type.color + ModularArmor.cfgmgr.getLocalization().getString(path));
+	}
 
 	public enum MessageType {
 		GOOD(ChatColor.GREEN), INFO(ChatColor.YELLOW), BAD(ChatColor.RED);

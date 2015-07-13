@@ -39,7 +39,7 @@ public class BaseArmorItem {
 		case "HELMET":
 			matName = localization.getString("Helmet Name");
 			break;
-		case "LEGGEINGS":
+		case "LEGGINGS":
 			matName = localization.getString("Leggings Name");
 			break;
 		}

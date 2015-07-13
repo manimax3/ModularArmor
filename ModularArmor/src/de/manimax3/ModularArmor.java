@@ -8,6 +8,7 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import de.manimax3.cmd.MAReload;
+import de.manimax3.cmd.MAUpdate;
 import de.manimax3.listener.MACombatListener;
 import de.manimax3.listener.MACreationListener;
 import de.manimax3.listener.MAGuiOpenListener;
@@ -30,14 +31,15 @@ public class ModularArmor extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		pm = this.getServer().getPluginManager();
-		setupEconomy();
+		console = this.getServer().getConsoleSender();
 		cfgmgr = new ConfigManager(this);
 		msgmgr = new MessageManager();
 		cfgmgr.setup();
+		setupEconomy();
 		registerEvents();
 		registerCommand();
-
-		console = this.getServer().getConsoleSender();
+		checkOlderVersions();
+		
 
 		if (!Itemnbtapi.ispluginisworking())
 			console.sendMessage(PREFIX + "§4"
@@ -45,6 +47,7 @@ public class ModularArmor extends JavaPlugin {
 		else
 			console.sendMessage(PREFIX + cfgmgr.getLocalization().getString("PluginEnabled"));
 	}
+
 
 	@Override
 	public void onDisable() {
@@ -60,6 +63,7 @@ public class ModularArmor extends JavaPlugin {
 
 	private void registerCommand() {
 		this.getCommand("mareload").setExecutor(new MAReload());
+		this.getCommand("maupdate").setExecutor(new MAUpdate());
 	}
 	
 	private boolean setupEconomy()
@@ -72,4 +76,14 @@ public class ModularArmor extends JavaPlugin {
         return (economy != null);
     }
 	
+	private void checkOlderVersions() {
+		String version = this.getDescription().getVersion();
+
+		if(!(cfgmgr.getConfigVersion().equalsIgnoreCase(version)) || cfgmgr.getConfigVersion() == null){
+			console.sendMessage(PREFIX + "The config.yml may be outdated get the appropriate version with /maupdate config");
+		}
+		if(!(cfgmgr.getLocalizationVersion().equalsIgnoreCase(version)) || cfgmgr.getLocalizationVersion() == null){
+			console.sendMessage(PREFIX + "The localization.yml may be outdated get the appropriate version with /maupdate localization");
+		}
+}
 }

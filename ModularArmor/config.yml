@@ -1,15 +1,18 @@
+Version: 1.2
 DiamondBlockLossChance: 0
 CreationWaitTime: 10
 Upgrades:
   DamageReduction:
     BasePrize: 10000.0
     RaisingConstant: 2.0
+    maxLevel: 0
   Unbreakable:
     BasePrize: 10000.0
-    RaisingConstant: 2.0
   FireAbsorption:
     BasePrize: 10000.0
     RaisingConstant: 2.0
+    maxLevel: 0
   PoisionAbsorption:
     BasePrize: 10000.0
     RaisingConstant: 2.0
+    maxLevel: 0

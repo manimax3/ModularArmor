@@ -6,6 +6,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import de.manimax3.ModularArmor;
+import de.manimax3.armor.UpgradeType;
 import de.manimax3.util.MessageManager;
 import de.manimax3.util.MessageManager.MessageType;
 
@@ -25,11 +26,13 @@ public class MAReload implements CommandExecutor {
 
 				ModularArmor.cfgmgr.save();
 				ModularArmor.cfgmgr.load();
+				UpgradeType.updateMaxLevels();
 				msgmgr.msgPlayer(p, MessageType.INFO, "ConfigReload");
 			}
 		} else {
 			ModularArmor.cfgmgr.save();
 			ModularArmor.cfgmgr.load();
+			UpgradeType.updateMaxLevels();
 			String s = ModularArmor.cfgmgr.getLocalization().getString(
 					"ConfigReload");
 			ModularArmor.console.sendMessage(ModularArmor.PREFIX + s);

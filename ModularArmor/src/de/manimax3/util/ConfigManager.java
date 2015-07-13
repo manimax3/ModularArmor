@@ -9,6 +9,7 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import de.manimax3.ModularArmor;
+import de.manimax3.armor.UpgradeType;
 
 public class ConfigManager {
 
@@ -42,6 +43,8 @@ public class ConfigManager {
 		config = YamlConfiguration.loadConfiguration(fconfig);
 		localization = YamlConfiguration.loadConfiguration(flocalization);
 		data = YamlConfiguration.loadConfiguration(fdata);
+		
+		UpgradeType.updateMaxLevels();
 	}
 
 	public FileConfiguration getConfig() {
@@ -55,7 +58,12 @@ public class ConfigManager {
 		return data;
 	}
 	
-
+	public String getConfigVersion(){
+		return getConfig().getString("Version");
+	}
+	public String getLocalizationVersion(){
+		return getLocalization().getString("Version");
+	}
 	public void save() {
 		// localization.options().copyDefaults(true);
 		// config.options().copyDefaults(true);
@@ -80,6 +88,13 @@ public class ConfigManager {
 			e.printStackTrace();
 		}
 
+	}
+	
+	public void forceUpdate(boolean config, boolean localization){
+		if(localization)
+		plugin.saveResource("localization.yml", true);
+		if(config)
+		plugin.saveResource("config.yml", true);
 	}
 
 }

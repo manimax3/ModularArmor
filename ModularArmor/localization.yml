@@ -1,4 +1,5 @@
 # Things you can translate if you want
+Version: 1.2
 ChestPlate Name: ChestPlate
 Leggings Name: Leggings
 Boots Name: Boots
@@ -19,3 +20,5 @@ ModularArmorCreationNoDamage: To create a new Modular armor the input armor must
 CostToUpgrade: "Upgrade Prize:"
 NotEnoughMoney: Sorry but you dont have enough money to buy this!
 UpgradeBuySuc: You succesfully bought a new Upgrade!
+DataUpdated: You succesfully updated the YMl File!
+WrongArguments: You entered the wrong arguments for this Command!

@@ -5,7 +5,7 @@ import org.bukkit.Material;
 public enum ArmorType {
 
 	HELMET(Material.DIAMOND_HELMET),
-	LEGGEINGS(Material.DIAMOND_LEGGINGS),
+	LEGGINGS(Material.DIAMOND_LEGGINGS),
 	CHESTPLATE(	Material.DIAMOND_CHESTPLATE),
 	BOOTS(Material.DIAMOND_BOOTS);
 

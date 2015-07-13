@@ -155,14 +155,18 @@ public class ModularArmorPart {
 	}
 
 	public double getPrizeToUpgrade(UpgradeType type) {
+		
+		if (type == null) return 0;
+		
 		double basePrize = config.getDouble("Upgrades." + type.toString()
 				+ ".BasePrize");
 		double raisingConst = config.getDouble("Upgrades." + type.toString()
 				+ ".RaisingConstant");
 //		System.out.println(type.toString() + " BasePrize: " + basePrize
 //				+ " Raising: " + raisingConst);
-		return Math.round(basePrize
+		double price = Math.round(basePrize
 				* Math.pow(raisingConst, this.getUpgradeLevel(type)));
+		return price;
 	}
 
 }
