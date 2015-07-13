@@ -16,11 +16,11 @@ import de.manimax3.bases.BaseArmorItem;
 import de.manimax3.bases.BaseInventory;
 import de.manimax3.util.MessageManager;
 import de.manimax3.util.MessageManager.MessageType;
-import de.tr7zw.itemnbtapi.Itemnbtapi;
-import de.tr7zw.itemnbtapi.NBTItem;
+import de.tr7zw.itemnbtapi.ma.Itemnbtapi;
+import de.tr7zw.itemnbtapi.ma.NBTItem;
 
 public class MAGuiUseListener implements Listener {
-	
+
 	private MessageManager msgmgr = ModularArmor.msgmgr;
 
 	@EventHandler
@@ -39,7 +39,6 @@ public class MAGuiUseListener implements Listener {
 		Player p = (Player) e.getWhoClicked();
 		e.setCancelled(true);
 
-		
 		ItemStack item = e.getCurrentItem();
 
 		if (item == null || item.getType() == Material.STAINED_GLASS_PANE)
@@ -52,21 +51,21 @@ public class MAGuiUseListener implements Listener {
 		UpgradeType type = UpgradeType
 				.valueOf(nbtItem.getString("UpgradeType"));
 
-		int id = Itemnbtapi.getNBTItem(
-				MAGuiOpenListener.playerInMAGui.get(p))
-				.getInteger("ID");
+		int id = Itemnbtapi.getNBTItem(MAGuiOpenListener.playerInMAGui.get(p))
+				.getInteger("ID"); 
 		double price = nbtItem.getDouble("Price");
-		
-		if(!ModularArmor.economy.has(p, price)){
-			msgmgr.msgPlayer(p, MessageType.INFO, "NotEnoughMoney");
-			return;
+
+		if (ModularArmor.plugin.vaultEnabled) {
+			if (!((net.milkbowl.vault.economy.Economy) ModularArmor.plugin.getEconomy()).has(p, price)) {
+				msgmgr.msgPlayer(p, MessageType.INFO, "NotEnoughMoney");
+				return;
+			}
 		}
 
 		ModularArmorPart armor = null;
-		
-		Material mat = MAGuiOpenListener.playerInMAGui.get(
-				p).getType();
-		
+
+		Material mat = MAGuiOpenListener.playerInMAGui.get(p).getType();
+
 		ArmorType arType = ArmorType.getArmorTypeByMat(mat);
 
 		if (arType == null || type == null) {
@@ -74,18 +73,20 @@ public class MAGuiUseListener implements Listener {
 		}
 
 		armor = ModularArmorPart.deserialize(id, arType);
-		
-		if(armor.getUpgradeLevel(type) >= type.maxLevel){
+
+		if (armor.getUpgradeLevel(type) >= type.maxLevel) {
 			msgmgr.msgPlayer(p, MessageType.INFO, "AlreadyMaxLevel");
 			return;
 		}
-		
-		ModularArmor.economy.withdrawPlayer(p, price);
-		msgmgr.msgPlayer(p, MessageType.GOOD, "UpgradeBuySuc");
+		if (ModularArmor.plugin.vaultEnabled) {
+			((net.milkbowl.vault.economy.Economy) ModularArmor.plugin.getEconomy()).withdrawPlayer(p, price);
+			msgmgr.msgPlayer(p, MessageType.GOOD, "UpgradeBuySuc");
+		}else{
+			msgmgr.msgPlayer(p, MessageType.GOOD, "UpgradeAddSuc");
+		}
 		armor.addUpgrade(type, 1);
-		BaseArmorItem.updateArmorItem(
-				MAGuiOpenListener.playerInMAGui.get(p),
-				p);
+		BaseArmorItem
+				.updateArmorItem(MAGuiOpenListener.playerInMAGui.get(p), p);
 		BaseInventory.update(p);
 	}
 

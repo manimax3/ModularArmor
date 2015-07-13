@@ -1,8 +1,8 @@
 name: ModularArmor
 main: de.manimax3.ModularArmor
-version: 1.2
-description: Adds a ModularArmor
-depend: [ItemNBTAPI, Vault]
+version: 1.3
+description: This plugin makes it possible to add upgrades to your Armor!
+softdepend: [Vault]
 
 commands:
    mareload:

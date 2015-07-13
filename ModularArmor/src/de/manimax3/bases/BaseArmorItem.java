@@ -15,8 +15,8 @@ import de.manimax3.ModularArmor;
 import de.manimax3.armor.ArmorType;
 import de.manimax3.armor.ModularArmorPart;
 import de.manimax3.armor.UpgradeType;
-import de.tr7zw.itemnbtapi.Itemnbtapi;
-import de.tr7zw.itemnbtapi.NBTItem;
+import de.tr7zw.itemnbtapi.ma.Itemnbtapi;
+import de.tr7zw.itemnbtapi.ma.NBTItem;
 
 public class BaseArmorItem {
 

@@ -8,7 +8,7 @@ import org.bukkit.inventory.ItemStack;
 
 import de.manimax3.ErrorCode;
 import de.manimax3.ModularArmor;
-import de.tr7zw.itemnbtapi.Itemnbtapi;
+import de.tr7zw.itemnbtapi.ma.Itemnbtapi;
 
 public class ModularArmorPart {
 	private final int ID;

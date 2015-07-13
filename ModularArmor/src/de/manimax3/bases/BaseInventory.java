@@ -19,9 +19,11 @@ import de.manimax3.armor.ArmorType;
 import de.manimax3.armor.ModularArmorPart;
 import de.manimax3.armor.UpgradeType;
 import de.manimax3.listener.MAGuiOpenListener;
-import de.tr7zw.itemnbtapi.NBTItem;
+import de.tr7zw.itemnbtapi.ma.NBTItem;
 
 public class BaseInventory {
+
+	private static ModularArmor plugin = ModularArmor.plugin;
 
 	@SuppressWarnings("deprecation")
 	public static Inventory createInventory(Player p) {
@@ -96,10 +98,14 @@ public class BaseInventory {
 
 		List<String> lore = new ArrayList<String>();
 		if (armor.getUpgradeLevel(type) < type.maxLevel) {
-			lore.add("§fPrice: "
-					+ "§6"
-					+ ModularArmor.economy.format(armor.getPrizeToUpgrade(type)));
-		}else lore.add("§7Already at Max Level");
+			if (plugin.vaultEnabled) {
+				lore.add("§fPrice: "
+						+ "§6"
+						+ ((net.milkbowl.vault.economy.Economy) plugin.getEconomy()).format(
+								armor.getPrizeToUpgrade(type)));
+			}
+		} else
+			lore.add("§7Already at Max Level");
 		meta.setLore(lore);
 
 		meta.setDisplayName("Damage Reduction");
@@ -124,10 +130,14 @@ public class BaseInventory {
 
 		List<String> lore = new ArrayList<String>();
 		if (armor.getUpgradeLevel(type) < type.maxLevel) {
-			lore.add("§fPrice: "
-					+ "§6"
-					+ ModularArmor.economy.format(armor.getPrizeToUpgrade(type)));
-		}else lore.add("§7Already at Max Level");
+			if (plugin.vaultEnabled) {
+				lore.add("§fPrice: "
+						+ "§6"
+						+ ((net.milkbowl.vault.economy.Economy) plugin.getEconomy()).format(
+								armor.getPrizeToUpgrade(type)));
+			}
+		} else
+			lore.add("§7Already at Max Level");
 		meta.setLore(lore);
 
 		meta.setDisplayName("Poison Absorption");
@@ -163,10 +173,14 @@ public class BaseInventory {
 
 		List<String> lore = new ArrayList<String>();
 		if (armor.getUpgradeLevel(type) < type.maxLevel) {
-			lore.add("§fPrice: "
-					+ "§6"
-					+ ModularArmor.economy.format(armor.getPrizeToUpgrade(type)));
-		}else lore.add("§7Already at Max Level");
+			if (plugin.vaultEnabled) {
+				lore.add("§fPrice: "
+						+ "§6"
+						+ ((net.milkbowl.vault.economy.Economy) plugin.getEconomy()).format(
+								armor.getPrizeToUpgrade(type)));
+			}
+		} else
+			lore.add("§7Already at Max Level");
 		meta.setLore(lore);
 
 		meta.setDisplayName("Ubreakable");
@@ -202,10 +216,14 @@ public class BaseInventory {
 
 		List<String> lore = new ArrayList<String>();
 		if (armor.getUpgradeLevel(type) < type.maxLevel) {
-			lore.add("§fPrize: "
-					+ "§6"
-					+ ModularArmor.economy.format(armor.getPrizeToUpgrade(type)));
-		}else lore.add("§7Already at Max Level");
+			if (plugin.vaultEnabled) {
+				lore.add("§fPrice: "
+						+ "§6"
+						+ ((net.milkbowl.vault.economy.Economy) plugin.getEconomy()).format(
+								armor.getPrizeToUpgrade(type)));
+			}
+		} else
+			lore.add("§7Already at Max Level");
 		meta.setLore(lore);
 
 		meta.setDisplayName("Fire Absorption");
