@@ -1,5 +1,5 @@
 # Things you can translate if you want
-Version: 1.3
+Version: 1.3.1
 ChestPlate Name: ChestPlate
 Leggings Name: Leggings
 Boots Name: Boots
@@ -23,3 +23,5 @@ UpgradeBuySuc: You succesfully bought a new Upgrade!
 UpgradeAddSuc: You succesfully added a new Upgrade!
 DataUpdated: You succesfully updated the YMl File!
 WrongArguments: You entered the wrong arguments for this Command!
+ConfigUpdate: The config.yml may be outdated get the appropriate version with /maupdate config
+LocalizationUpdate: The localization.yml may be outdated get the appropriate version with /maupdate localization

@@ -13,6 +13,7 @@ import de.manimax3.listener.MAGuiOpenListener;
 import de.manimax3.listener.MAGuiUseListener;
 import de.manimax3.util.ConfigManager;
 import de.manimax3.util.MessageManager;
+import de.manimax3.util.MessageManager.MessageType;
 import de.tr7zw.itemnbtapi.ma.Itemnbtapi;
 
 public class ModularArmor extends JavaPlugin {
@@ -50,11 +51,9 @@ public class ModularArmor extends JavaPlugin {
 		checkOlderVersions();
 
 		if (!Itemnbtapi.ispluginisworking())
-			console.sendMessage(PREFIX + "§4"
-					+ cfgmgr.getLocalization().getString("ApiNotWorking"));
+			msgmgr.msgConsole(MessageType.BAD, "ApiNotWorking");
 		else
-			console.sendMessage(PREFIX
-					+ cfgmgr.getLocalization().getString("PluginEnabled"));
+			msgmgr.msgConsole(MessageType.INFO, "PluginEnabled");
 	}
 
 	@Override
@@ -94,13 +93,11 @@ public class ModularArmor extends JavaPlugin {
 
 		if (!(cfgmgr.getConfigVersion().equalsIgnoreCase(version))
 				|| cfgmgr.getConfigVersion() == null) {
-			console.sendMessage(PREFIX
-					+ "The config.yml may be outdated get the appropriate version with /maupdate config");
+			msgmgr.msgConsole(MessageType.INFO, "ConfigUpdate");
 		}
 		if (!(cfgmgr.getLocalizationVersion().equalsIgnoreCase(version))
 				|| cfgmgr.getLocalizationVersion() == null) {
-			console.sendMessage(PREFIX
-					+ "The localization.yml may be outdated get the appropriate version with /maupdate localization");
+			msgmgr.msgConsole(MessageType.INFO, "LocalizationUpdate");
 		}
 	}
 	

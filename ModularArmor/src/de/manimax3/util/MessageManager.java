@@ -13,12 +13,21 @@ public class MessageManager {
 	}
 
 	public void msgPlayer(Player p, MessageType type, String path) {
-		p.sendMessage(ModularArmor.PREFIX + type.color
-				+ ModularArmor.cfgmgr.getLocalization().getString(path));
+		String raw = ModularArmor.cfgmgr.getLocalization().getString(path);
+		if (raw == null){
+			ModularArmor.console.sendMessage(ModularArmor.PREFIX + MessageType.INFO.color + "You need to update your localization with /mau localization");
+			return;
+		}
+		p.sendMessage(ModularArmor.PREFIX + type.color + raw);
 	}
 	
 	public void msgConsole(MessageType type, String path){
-		ModularArmor.console.sendMessage(ModularArmor.PREFIX + type.color + ModularArmor.cfgmgr.getLocalization().getString(path));
+		String raw = ModularArmor.cfgmgr.getLocalization().getString(path);
+		if (raw == null){
+			ModularArmor.console.sendMessage(ModularArmor.PREFIX + MessageType.INFO.color + "You need to update your localization with /mau localization");
+			return;
+		}
+		ModularArmor.console.sendMessage(ModularArmor.PREFIX + type.color + raw);
 	}
 
 	public enum MessageType {

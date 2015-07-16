@@ -91,8 +91,9 @@ public class BaseArmorItem {
 		if (p != null) {
 			int i = 0;
 			boolean found = false;
+			Material mat = item.getType();
 			for (ItemStack cont : p.getInventory().getContents()) {
-				if (itemID == ModularArmorPart.getID(cont)) {
+				if (itemID == ModularArmorPart.getID(cont) && mat == cont.getType()) {
 					p.getInventory().setItem(i, item);
 					found = true;
 					break;
@@ -102,7 +103,7 @@ public class BaseArmorItem {
 			if (!found) {
 				ItemStack[] contents = p.getInventory().getArmorContents();
 				for (int j = 0; j < contents.length; j++) {
-					if (itemID == ModularArmorPart.getID(contents[j])) {
+					if (itemID == ModularArmorPart.getID(contents[j])&& mat == contents[j].getType()) {
 						contents[j] = item;
 						p.getInventory().setArmorContents(contents);
 						break;
